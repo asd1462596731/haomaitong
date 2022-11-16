@@ -1,0 +1,385 @@
+#home_nav {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: @theme_areabg;
+  .flex_algin;
+
+  // height: 3.146667rem;
+  .nav_item {
+    width: 33%;
+    .flex_center;
+    flex-direction: column;
+
+    span {
+      font-size: .373333rem;
+      color: #303133;
+    }
+
+    .item_img {
+      width: 100%;
+      height: .96rem;
+      .flex_center;
+      margin-bottom: .333333rem;
+
+      .width72 {
+        width: .96rem;
+        height: auto;
+      }
+
+      .width67 {
+        width: .893333rem;
+        height: auto;
+      }
+
+      .width56 {
+        width: .746667rem;
+        height: auto;
+      }
+
+      .width53 {
+        width: .706667rem;
+        height: auto;
+      }
+    }
+  }
+}
+
+#home_nav :nth-child(n+4) {
+  margin-top: .13rem;
+  padding-bottom: .2rem;
+}
+
+#home_nav :nth-child(-n+3) {
+  margin-top: .2rem;
+  margin-bottom: .2rem;
+}
+
+.zhiyin_img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+#home_link {
+  background-color: @theme_areabg;
+  width: 100%;
+  margin: .266667rem 0;
+
+  .link_box {
+    padding-top: .4rem;
+    padding-bottom: .666667rem;
+
+    .link_title {
+      padding: 0 .4rem;
+      font-size: .426667rem;
+      color: #303133;
+      margin-bottom: .6rem;
+    }
+
+    &:first-child {
+      .link_title {
+        padding-top: .2rem;
+      }
+    }
+
+    .link_list {
+      .flex_algin;
+      width: 100%;
+
+      .link_item {
+        width: 25%;
+        .flex_center;
+        flex-direction: column;
+
+        span {
+          font-size: .346667rem;
+          color: #48494D;
+        }
+
+        .item_img {
+          .flex_center;
+          height: .733333rem;
+          width: 100%;
+          margin-bottom: .266667rem;
+
+          .width52 {
+            width: .693333rem;
+            height: auto;
+          }
+
+          .height52 {
+            height: .693333rem;
+            width: auto;
+          }
+
+          .width54 {
+            width: .72rem;
+            height: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+#home_banner {
+  padding: .4rem;
+  box-sizing: content-box;
+  background-color: @theme_areabg;
+  text-align: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+}
+
+.home_box {
+  // position: absolute;
+  // bottom: 1.306667rem;
+  width: 100%;
+  min-height: calc(100% - .733333rem);
+}
+
+.home_container {
+  // min-height: calc(100% - .733333rem);
+}
+
+#home_bottom {
+  .flex_center;
+
+  span {
+    height: .02rem;
+    width: 2.84rem;
+    background-color: #D8DCE6;
+  }
+
+  p {
+    margin: 0 .333333rem;
+    font-size: .293333rem;
+    color: #909399;
+  }
+
+  a {
+    color: #909399;
+  }
+}
+
+#index_cashier {
+  .cashier_qrcode {
+    width: 100%;
+    .flex_center;
+    padding-top: 1.066667rem;
+    padding-bottom: .933333rem;
+    background-color: @theme_areabg;
+
+    img {
+      width: 5.653333rem;
+      height: 5.653333rem;
+    }
+  }
+}
+
+#index_shoper {
+  .shoper_qrcode {
+    width: 100%;
+    .flex_center;
+    padding-top: 1.066667rem;
+    padding-bottom: .933333rem;
+    background-color: @theme_areabg;
+
+    img {
+      width: 5.653333rem;
+      height: 5.653333rem;
+    }
+  }
+}
+
+#home_zy {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  .zy_box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+
+    &.proxy,
+    &.sale {
+      .zy_img1 {
+        position: absolute;
+        top: 1.533333rem;
+        width: 8.493333rem;
+        height: 6.053333rem;
+        left: .76rem;
+        z-index: 2;
+      }
+
+      .zy_img2 {
+        position: absolute;
+        top: 1.533333rem;
+        width: 8.92rem;
+        height: 2.76rem;
+        right: .253333rem;
+        z-index: 2;
+      }
+
+      .zy_img3 {
+        position: absolute;
+        top: 5.866667rem;
+        width: 8.84rem;
+        height: 5.24rem;
+        left: .093333rem;
+        z-index: 2;
+      }
+    }
+
+    &.visitor {
+      .zy_img1 {
+        position: absolute;
+        top: 1.533333rem;
+        width: 8.533333rem;
+        height: 6.866667rem;
+        left: .306667rem;
+        z-index: 2;
+      }
+
+      .zy_img2 {
+        position: absolute;
+        top: 1.533333rem;
+        width: 7.853333rem;
+        height: 6.786667rem;
+        left: 1.306667rem;
+        z-index: 2;
+      }
+    }
+
+    &.merchant {
+      .zy_img1 {
+        position: absolute;
+        top: 1.466667rem;
+        width: 8.946667rem;
+        height: 2.76rem;
+        right: .253333rem;
+        z-index: 2;
+      }
+
+      .zy_img2 {
+        position: absolute;
+        top: 5.8rem;
+        width: 8.666667rem;
+        height: 5.12rem;
+        left: .093333rem;
+        z-index: 2;
+      }
+
+      .zy_img3 {
+        position: absolute;
+        top: 9.333333rem;
+        width: 9.08rem;
+        height: 2.306667rem;
+        right: .12rem;
+        z-index: 2;
+      }
+    }
+
+    .zy_button {
+      position: absolute;
+      width: 3.76rem;
+      height: 1.333333rem;
+      bottom: 2.666667rem;
+      left: 50%;
+      margin-left: -1.88rem;
+      z-index: 10;
+    }
+  }
+}
+
+#home_yd {
+  .fixed;
+  z-index: 999999;
+
+  .van-swipe {
+    .fixed;
+    z-index: 1;
+
+    .van-swipe-item {
+      position: relative;
+
+      p {
+        text-align: center;
+        position: absolute;
+        bottom: 3.666667rem;
+        font-size: .48rem;
+        color: @theme_color;
+        width: 100%;
+
+        &.color2 {
+          color: @banner_color;
+        }
+      }
+
+      span {
+        text-align: center;
+        position: absolute;
+        bottom: 2.773333rem;
+        font-size: .4rem;
+        color: #898989;
+        width: 100%;
+      }
+    }
+
+    .van-swipe__indicator {
+      background-color: #4a4e55;
+    }
+  }
+
+  .home_yd_close {
+    position: fixed;
+    top: 1.04rem;
+    right: .32rem;
+    width: 1.386667rem;
+    height: .72rem;
+    .flex_center;
+    font-size: .4rem;
+    color: #ffffff;
+    border-radius: .36rem;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .home_yd_sure {
+    position: absolute;
+    z-index: 2;
+    bottom: 1.226667rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 4.586667rem;
+    height: 1.066667rem;
+    .flex_center;
+    font-size: .48rem;
+    color: #ffffff;
+    border-radius: .533333rem;
+    background-color: @theme_color;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}

@@ -1,0 +1,69 @@
+export const UPDATE_DIRECTION = 'UPDATE_DIRECTION' /* 更新路由方向 */
+
+export const UPDATE_USER_INFO = 'UPDATE_USER_INFO' /* 设置用户信息 */
+
+export const UPDATE_USER_TOKEN = 'UPDATE_USER_TOKEN' /* 设置token */
+
+export const SET_USER_LOGOUT = 'SET_USER_LOGOUT' /* 退出登录 */
+
+export const SET_COUNT = 'SET_COUNT' /* 设置倒计时 */
+
+export const SET_APPLY_SHOP_TAB = 'SET_APPLY_SHOP_TAB'
+
+export const SET_APPLY_INFO = 'SET_APPLY_INFO'
+
+export const SET_ADDRESS_OBJ = 'SET_ADDRESS_OBJ'
+
+export const SET_ADDRESS_SELECT_ALGIN = 'SET_ADDRESS_SELECT_ALGIN'
+
+export const SET_MATERIAL_ADDRESS = 'SET_MATERIAL_ADDRESS'
+
+export const SET_MAILING_INDEX = 'SET_MAILING_INDEX'
+
+export const SET_GOODS_LIST = 'SET_GOODS_LIST'
+
+export const SET_FREIGHT = 'SET_FREIGHT'
+
+export const SET_SELECT_GOODS = 'SET_SELECT_GOODS'
+
+export const SET_ADDRESS_NAME = 'SET_ADDRESS_NAME'
+
+export const SET_APPLY_INFO_ADDRESS = 'SET_APPLY_INFO_ADDRESS'
+
+export const SET_RATE_REGION = 'SET_RATE_REGION'
+
+export const SET_PICTURE = 'SET_PICTURE'
+
+export const SET_PAY_RATE = 'SET_PAY_RATE'
+
+export const SET_MERCHANT_STATUS_SHOW = 'SET_MERCHANT_STATUS_SHOW'
+
+export const SET_APPLY_UID = 'SET_APPLY_UID'
+
+export const SET_MQ_CLIENT_ID = 'SET_MQ_CLIENT_ID'
+
+export const SET_DESK_QRCODE = 'SET_DESK_QRCODE'
+
+export const SET_BANNER_LIST = 'SET_BANNER_LIST'
+
+export const SET_SUB_UID = 'SET_SUB_UID'
+
+export const SET_INDEX_BANNER = 'SET_INDEX_BANNER'
+
+export const SET_SHOW_ZY = 'SET_SHOW_ZY'
+
+export const SET_DEVICE_ID = 'SET_DEVICE_ID'
+
+export const SET_BANNER_PAGE_SHOW = 'SET_BANNER_PAGE_SHOW'
+
+export const SET_BANK_OBJ = 'SET_BANK_OBJ'
+
+export const SET_BUSINESS_SHOW_KEY = 'SET_BUSINESS_SHOW_KEY'
+
+//设置环境
+export const SET_IS_WEB_TYPE = 'SET_IS_WEB_TYPE'
+
+export const SET_IS_CODE = 'SET_IS_CODE'
+
+//网站配置
+export const SET_SITE_CONFIG = 'SET_SITE_CONFIG'

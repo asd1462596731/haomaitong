@@ -1,0 +1,26 @@
+@theme_color: #0099FF; // 主题颜色
+@theme_color_bg: rgba(0,153,255, 0.2);
+@theme_areabg: #ffffff;
+@theme_bg: #F5F5F5; // 主题背景色
+@head_bg: #FFFFFF; // head背景色
+@head_color: #222222; // head字体颜色
+@head_color_shallow: #666666; // head字体颜色-浅色
+@foot_color: #909399; // foot字体颜色
+@foot_color_active: #0099FF; // foot字体active
+@foot_bg: #ffffff; // foot背景色
+@banner_color: #FC913F; // 引导页color
+// 公共样式
+@import './modules/public.less';
+#root{
+  .fixed;
+  overflow-x: hidden;
+}
+@import './modules/head_foot.less';
+@import './modules/home.less';
+@import './modules/auth.less';
+@import './modules/merchant.less';
+@import './modules/common.less';
+@import './modules/mine.less';
+@import './modules/proxy.less';
+@import './modules/bill.less';
+@import './modules/visitor.less';
