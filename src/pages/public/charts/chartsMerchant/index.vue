@@ -1,8 +1,13 @@
 <template>
 	<div id="charts" class="page_container" :style="`padding-top: ${head_rem}rem;`">
 		<NavBar :meta="meta" />
-
-		<div class="head-but">
+		<van-tabs v-model="activeName" color="#d5d5d5" @change="cut">
+             <van-tab title="经营报表" name="statement"></van-tab>
+             <van-tab title="营业趋势" name="tendency"></van-tab>
+             <van-tab title="顾客" name="client"></van-tab>
+</van-tabs>
+<div v-if="(activeName === 'statement')">
+	<div class="head-but">
 			<div class="head-but-left">
 
 				<div class="ht" :class="{'ht_c':is_check == index }" v-for="(item,index) in data_time"
@@ -92,6 +97,9 @@
 
 			</div>
 		</van-popup>
+</div>
+<Tendency v-if="(activeName === 'tendency')"></Tendency>
+<Client v-if="(activeName === 'client')"></Client>
 	</div>
 
 
@@ -99,6 +107,8 @@
 </template>
 <script>
 	import NavBar from '@/components/navBar'
+	import Tendency from '../tendency/index'
+	import Client from '../client/index'
 	import * as request from '@/api'
 	import ChartsHead from '../components/chartsHead'
 	import {
@@ -112,7 +122,9 @@
 	export default {
 		components: {
 			ChartsHead,
-			NavBar
+			NavBar,
+			Tendency,
+			Client
 		},
 		computed: {
 			...mapGetters(['user_token', 'is_web_type', 'user_info'])
@@ -139,6 +151,7 @@
 				id: '',
 				all_money: [],
 				order_money: [],
+				activeName:'',
 				log_money: [],
 				pice_all: [],
 				data_time: [{
@@ -196,268 +209,272 @@
 		mounted() {
 			this.getOrderReportFunc()
 		},
-		methods: {
-			getStores(){
-				request.get_getStores().then(res => {
-					if (res.code === this.SUCCESS_CODE) {
-						this.selectStores = res.data
-					}
-				})
-			},
-			getMerchants() {
-				request.get_get_getMerchants(this.user_info.id).then(res => {
-					if (res.code === this.SUCCESS_CODE) {
-						this.selectMerchants = res.data
-					}
-				})
-			},
-			changeMet(event) {
-				console.log()
-				this.mach_id = event.target.value
-				if(event.target.value !=''){
-					let arr_1 = this.selectMerchants
-					let mer_name_1 = arr_1.find((item)=>{
-						if(item.id == this.mach_id){
-							return item;
-						}
-					})
-					console.log(mer_name_1)
-					this.title = mer_name_1.merchant_alias + '（经营明细表）'
-					this.mach_name = mer_name_1.merchant_alias
-				}else{
-					if (this.user_info.level === 'master') {
-						this.title = this.user_info.nickname + '（经营明细表）'
-						this.mach_name = this.user_info.nickname
-					}else{
-						this.title = this.user_info.merchant.merchant_alias + '（经营明细表）'
-						this.mach_name = this.user_info.merchant.merchant_alias
-					}
-				}
+	methods: {
+		//切换
+		cut() {
+			if (this.activeName === 'statement') {
 				this.getOrderReportFunc()
-				// if(this.user_info.level == 'shoper'){
-					
-					
-				// }
-				// this.getOrderReportFunc()
-				// let arr = this.selectMerchants
-				// let mer_name = arr.find((item)=>{
-				// 	// console.log(item)
-				// 	if(item.id == this.id){
-				// 		return item;
-				// 	}
-				// })
-				// if(mer_name == undefined){
-				// 	return false
-				// }
-				// this.title = mer_name.merchant_alias + '（经营明细表）'
-				// this.mach_name = mer_name.merchant_alias
-			},
-			changeMet2(event) {
-				
-				this.desk_id = event.target.value
-				if(event.target.value !=''){
-					let arr_1 = this.selectStores
-					let mer_name_1 = arr_1.find((item)=>{
-						if(item.id == this.desk_id){
-							return item;
-						}
-					})
-					this.title = mer_name_1.name + '（经营明细表）'
-					this.mach_name = mer_name_1.name
-				}else{
-					if (this.user_info.level === 'master') {
-						this.title = this.user_info.nickname + '（经营明细表）'
-						this.mach_name = this.user_info.nickname
-					}else{
-						this.title = this.user_info.merchant.merchant_alias + '（经营明细表）'
-						this.mach_name = this.user_info.merchant.merchant_alias
-					}
+			}
+		},
+		getStores() {
+			request.get_getStores().then(res => {
+				if (res.code === this.SUCCESS_CODE) {
+					this.selectStores = res.data
 				}
-				this.getOrderReportFunc()
-				// if(this.user_info.level == 'shoper'){
-					
-					
-				// }
-				// this.getOrderReportFunc()
-				// let arr = this.selectMerchants
-				// let mer_name = arr.find((item)=>{
-				// 	// console.log(item)
-				// 	if(item.id == this.id){
-				// 		return item;
-				// 	}
-				// })
-				// if(mer_name == undefined){
-				// 	return false
-				// }
-				// this.title = mer_name.merchant_alias + '（经营明细表）'
-				// this.mach_name = mer_name.merchant_alias
-			},
-			email_show() {
-				this.is_popup = true
-				if(this.user_info.level == 'shoper'){
-					this.title = this.desk_name
+			})
+		},
+		getMerchants() {
+			request.get_get_getMerchants(this.user_info.id).then(res => {
+				if (res.code === this.SUCCESS_CODE) {
+					this.selectMerchants = res.data
 				}
-				
-			},
-			getOrderReportFunc() {
-				// this.time = this.start_time+'-'+this.end_time
-
-				request.post_order_report(this.start_time, this.end_time, this.key, this.mach_id, this.desk_id).then(res => {
-					if (res.code === this.SUCCESS_CODE) {
-
-						// this.line_chart_date = []
-						this.line_chat_list = res.data.data_time;
-						var data = res.data.data;
-						this.all_money = [];
-						this.order_money = [];
-						this.log_money = [];
-						var pice_total = 0;
-						var pice_zy = 0;
-						var pice_kj = 0;
-						var list_data = [];
-						for (const key in data) {
-
-							list_data.push({
-								day: key,
-								pice_zy: this.$math.round(pice_zy, 4),
-								pice_kj: this.$math.round(pice_kj, 4),
-								pice_total: this.$math.round(pice_total, 4)
-							})
-							pice_total += Number(data[key][0]);
-							pice_zy += Number(data[key][1]);
-							pice_kj += Number(data[key][2]);
-							this.all_money.push(Number(data[key][0]))
-							this.order_money.push(Number(data[key][1]))
-							this.log_money.push(Number(data[key][2]))
-						}
-						this.pice_all = [this.$math.round(pice_total, 4), this.$math.round(pice_zy, 4), this.$math
-							.round(pice_kj, 4)
-						]
-
-						this.json_data = list_data;
-						this.echear()
-					} else {
-						this.$toast.fail(res.msg)
+			})
+		},
+		changeMet(event) {
+			this.mach_id = event.target.value
+			if (event.target.value != '') {
+				let arr_1 = this.selectMerchants
+				let mer_name_1 = arr_1.find((item) => {
+					if (item.id == this.mach_id) {
+						return item;
 					}
 				})
-			},
-			getemail() {
-				if (this.email == '' || this.email == null) {
-					this.$toast.fail('请输入邮箱号！');
-					return false
-				}
-				var pattern =
-					/^([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-				let flag = pattern.test(this.email);
-
-				if (!flag) {
-					this.$toast.fail('请输入正确的邮箱！');
-					return false
-				}
-
-
-				var data = {
-					start_time: this.start_time,
-					end_time: this.end_time,
-					key: this.key,
-					email: this.email,
-					title: this.title,
-					mach_name: this.mach_name,
-					time: this.time,
-					mach_id:this.mach_id,
-					desk_id:this.desk_id
-				}
-
-
-				request.post_email_send(data).then(res => {
-					if (res.code === this.SUCCESS_CODE) {
-						this.is_popup = false
-						this.$toast.fail(res.msg)
-					} else {
-						this.$toast.fail(res.msg)
-					}
-				})
-
-			},
-			rq() {
-				if (!this.is_rq) {
-					this.is_rq = true
-					this.is_check = 'k'
-					this.key = 6
-					setTimeout(() => {
-
-						this.start_time = this.$refs.time_or.begin_date
-						this.end_time = this.$refs.time_or.end_date
-						this.time = this.start_time + '-' + this.end_time
-					}, 1)
-
+				console.log(mer_name_1)
+				this.title = mer_name_1.merchant_alias + '（经营明细表）'
+				this.mach_name = mer_name_1.merchant_alias
+			} else {
+				if (this.user_info.level === 'master') {
+					this.title = this.user_info.nickname + '（经营明细表）'
+					this.mach_name = this.user_info.nickname
 				} else {
-					this.is_rq = false
-					this.is_check = 0
-					this.key = 1
-					this.time = "天"
+					this.title = this.user_info.merchant.merchant_alias + '（经营明细表）'
+					this.mach_name = this.user_info.merchant.merchant_alias
 				}
-				this.getOrderReportFunc()
-			},
-			check_time(key, index, name) {
-				this.is_check = index;
+			}
+			this.getOrderReportFunc()
+			// if(this.user_info.level == 'shoper'){
+
+
+			// }
+			// this.getOrderReportFunc()
+			// let arr = this.selectMerchants
+			// let mer_name = arr.find((item)=>{
+			// 	// console.log(item)
+			// 	if(item.id == this.id){
+			// 		return item;
+			// 	}
+			// })
+			// if(mer_name == undefined){
+			// 	return false
+			// }
+			// this.title = mer_name.merchant_alias + '（经营明细表）'
+			// this.mach_name = mer_name.merchant_alias
+		},
+		changeMet2(event) {
+
+			this.desk_id = event.target.value
+			if (event.target.value != '') {
+				let arr_1 = this.selectStores
+				let mer_name_1 = arr_1.find((item) => {
+					if (item.id == this.desk_id) {
+						return item;
+					}
+				})
+				this.title = mer_name_1.name + '（经营明细表）'
+				this.mach_name = mer_name_1.name
+			} else {
+				if (this.user_info.level === 'master') {
+					this.title = this.user_info.nickname + '（经营明细表）'
+					this.mach_name = this.user_info.nickname
+				} else {
+					this.title = this.user_info.merchant.merchant_alias + '（经营明细表）'
+					this.mach_name = this.user_info.merchant.merchant_alias
+				}
+			}
+			this.getOrderReportFunc()
+			// if(this.user_info.level == 'shoper'){
+
+
+			// }
+			// this.getOrderReportFunc()
+			// let arr = this.selectMerchants
+			// let mer_name = arr.find((item)=>{
+			// 	// console.log(item)
+			// 	if(item.id == this.id){
+			// 		return item;
+			// 	}
+			// })
+			// if(mer_name == undefined){
+			// 	return false
+			// }
+			// this.title = mer_name.merchant_alias + '（经营明细表）'
+			// this.mach_name = mer_name.merchant_alias
+		},
+		email_show() {
+			this.is_popup = true
+			if (this.user_info.level == 'shoper') {
+				this.title = this.desk_name
+			}
+
+		},
+		getOrderReportFunc() {
+			// this.time = this.start_time+'-'+this.end_time
+
+			request.post_order_report(this.start_time, this.end_time, this.key, this.mach_id, this.desk_id).then(res => {
+				if (res.code === this.SUCCESS_CODE) {
+					// this.line_chart_date = []
+					this.line_chat_list = res.data.data_time;
+					var data = res.data.data;
+					this.all_money = [];
+					this.order_money = [];
+					this.log_money = [];
+					var pice_total = 0;
+					var pice_zy = 0;
+					var pice_kj = 0;
+					var list_data = [];
+					for (const key in data) {
+
+						list_data.push({
+							day: key,
+							pice_zy: this.$math.round(pice_zy, 4),
+							pice_kj: this.$math.round(pice_kj, 4),
+							pice_total: this.$math.round(pice_total, 4)
+						})
+						pice_total += Number(data[key][0]);
+						pice_zy += Number(data[key][1]);
+						pice_kj += Number(data[key][2]);
+						this.all_money.push(Number(data[key][0]))
+						this.order_money.push(Number(data[key][1]))
+						this.log_money.push(Number(data[key][2]))
+					}
+					this.pice_all = [this.$math.round(pice_total, 4), this.$math.round(pice_zy, 4), this.$math
+						.round(pice_kj, 4)
+					]
+
+					this.json_data = list_data;
+					this.echear()
+				} else {
+					this.$toast.fail(res.msg)
+				}
+			})
+		},
+		getemail() {
+			if (this.email == '' || this.email == null) {
+				this.$toast.fail('请输入邮箱号！');
+				return false
+			}
+			var pattern =
+				/^([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\-|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+			let flag = pattern.test(this.email);
+
+			if (!flag) {
+				this.$toast.fail('请输入正确的邮箱！');
+				return false
+			}
+
+
+			var data = {
+				start_time: this.start_time,
+				end_time: this.end_time,
+				key: this.key,
+				email: this.email,
+				title: this.title,
+				mach_name: this.mach_name,
+				time: this.time,
+				mach_id: this.mach_id,
+				desk_id: this.desk_id
+			}
+
+
+			request.post_email_send(data).then(res => {
+				if (res.code === this.SUCCESS_CODE) {
+					this.is_popup = false
+					this.$toast.fail(res.msg)
+				} else {
+					this.$toast.fail(res.msg)
+				}
+			})
+
+		},
+		rq() {
+			if (!this.is_rq) {
+				this.is_rq = true
+				this.is_check = 'k'
+				this.key = 6
+				setTimeout(() => {
+
+					this.start_time = this.$refs.time_or.begin_date
+					this.end_time = this.$refs.time_or.end_date
+					this.time = this.start_time + '-' + this.end_time
+				}, 1)
+
+			} else {
 				this.is_rq = false
-				this.key = key;
-				this.time = name
-				this.getOrderReportFunc()
-			},
+				this.is_check = 0
+				this.key = 1
+				this.time = "天"
+			}
+			this.getOrderReportFunc()
+		},
+		check_time(key, index, name) {
+			this.is_check = index;
+			this.is_rq = false
+			this.key = key;
+			this.time = name
+			this.getOrderReportFunc()
+		},
 
-			beginSearchHandler(data) {
-				this.start_time = data.begin
-				this.end_time = data.end
-				this.time = this.start_time + '-' + this.end_time
-				this.getOrderReportFunc()
-			},
-			ifweach() {
+		beginSearchHandler(data) {
+			this.start_time = data.begin
+			this.end_time = data.end
+			this.time = this.start_time + '-' + this.end_time
+			this.getOrderReportFunc()
+		},
+		ifweach() {
 
-				if (this.is_web_type == 'H5') {
+			if (this.is_web_type == 'H5') {
 
-					// this.$dialog.confirm({
-					// 		  message: "确认要导出表报？"
-					// 		}).then(() => {
+				// this.$dialog.confirm({
+				// 		  message: "确认要导出表报？"
+				// 		}).then(() => {
 
-					// 		}).catch(() => {
+				// 		}).catch(() => {
 
-					//   // on canccel
-					// })
-					this.get_summary_sheet();
+				//   // on canccel
+				// })
+				this.get_summary_sheet();
+			} else {
+
+				this.$app.openApp({
+					androidPkg: 'android.intent.action.VIEW',
+					mimeType: 'text/html',
+					uri: web_h5 + '/chartsSale'
+				}, function (ret, err) {
+					var msg = JSON.stringify(ret);
+					this.$app.alert({
+						title: 'openApp',
+						msg: msg,
+						buttons: ['确定']
+					});
+				});
+			}
+		},
+		get_summary_sheet() {
+			request.post_summary_sheet().then(res => {
+				if (res.code === this.SUCCESS_CODE) {
+
+					let arr = []
+					for (let i in res.data) {
+						arr.push(res.data[i])
+					}
+					this.json_data = arr[0];
 				} else {
 
-					this.$app.openApp({
-						androidPkg: 'android.intent.action.VIEW',
-						mimeType: 'text/html',
-						uri: web_h5 + '/chartsSale'
-					}, function(ret, err) {
-						var msg = JSON.stringify(ret);
-						this.$app.alert({
-							title: 'openApp',
-							msg: msg,
-							buttons: ['确定']
-						});
-					});
+					this.$toast.fail(res.msg)
 				}
-			},
-			get_summary_sheet() {
-				request.post_summary_sheet().then(res => {
-					if (res.code === this.SUCCESS_CODE) {
 
-						let arr = []
-						for (let i in res.data) {
-							arr.push(res.data[i])
-						}
-						this.json_data = arr[0];
-					} else {
-
-						this.$toast.fail(res.msg)
-					}
-
-				})
-
+			})
+			s
 			},
 			echear() {
 				let myChart = this.$echarts.init(document.getElementById('line_chart'))

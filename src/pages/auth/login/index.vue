@@ -35,8 +35,7 @@
 				<span @click="jumpTo('/verification')">验证码登录</span>
 			</div>
 		</div>
-		<div class="auth_bottom">
-			{{site_config.copyright}}
+		<div class="auth_bottom" v-html="site_config.copyright">
 		</div>
 	</div>
 </template>

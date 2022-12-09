@@ -2,8 +2,14 @@
 	<div id="fans" class="page_container" :style="`padding-top: ${head_rem}rem;`">
 		<NavBar :meta="meta" />
 		<div class="fnas_head">
-			<div class="head_title">粉丝数量(个）</div>
-			<div class="head_content">{{fans_count}}</div>
+			<div class="head_fans" >
+				<div class="head_title">今日新增</div>
+			<div class="head_content" style=" padding-left: .5rem;">{{today_count}}</div>
+			</div>
+			<div class="head_fans" >
+				<div class="head_title">粉丝数量(个）</div>
+			<div class="head_content" style=" padding-left: .62rem;" >{{fans_count}}</div>
+			</div>
 		</div>
 		<van-dropdown-menu v-if="this.user_info.level === 'master'" >
 			<van-dropdown-item v-model="merchants_id" :options="merchants_list" v-on:change="onRefresh_m" />
@@ -24,12 +30,13 @@
 						<div class="desc_top">
 							<span>{{item.serial}}</span>
 							<i>[粉丝编号]<i>{{item.desk_name}}</i></i>
-
+                            
 						</div>
 						<div class="desc_center">
 							<span v-if="item.from === 'barcode'">通过二维码支付成为您的粉丝</span>
 							<span v-if="item.from === 'app'">通过app被扫支付成为您的粉丝</span>
 							<span v-if="item.from === 'face'">通过刷脸支付成为您的粉丝</span>
+							<span v-if="item.from === 'pos'">通过pos支付成为您的粉丝</span>
 						</div>
 						<div class="desc_bottom">
 							{{item.create_time}}
@@ -63,6 +70,7 @@
 				fans_count: 0,
 				fans_list: [],
 				desk_id: 0,
+				today_count:0,
 				merchants_id: 0,
 				desk_data: [{
 					text: '全部门店',
@@ -124,6 +132,7 @@
 							this.fans_list = this.fans_list.concat(fans_list)
 						}
 						this.fans_count = res.data.count
+						this.today_count = res.data.today_count
 						this.loading = false
 						this.isLoading = false
 						if (fans_list.length === 0) {

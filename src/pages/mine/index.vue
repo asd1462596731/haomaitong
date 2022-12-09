@@ -142,6 +142,9 @@
 					case 'province':
 						shenfen = '省代理'
 						break
+					case 'merchant_d0':
+						shenfen = 'D0代理'
+						break
 					case 'city':
 						shenfen = '市代理'
 						break

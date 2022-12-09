@@ -48,6 +48,8 @@ export const SET_BANNER_LIST = 'SET_BANNER_LIST'
 
 export const SET_SUB_UID = 'SET_SUB_UID'
 
+export const MERCHANT_ID = 'MERCHANT_ID'
+
 export const SET_INDEX_BANNER = 'SET_INDEX_BANNER'
 
 export const SET_SHOW_ZY = 'SET_SHOW_ZY'

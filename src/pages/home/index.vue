@@ -19,7 +19,8 @@
 	//主商家
 	import indexMaster from './modules/index_master'
 	// 商家
-	import indexMerchant from './modules/index_merchant'
+// import indexMerchant from './modules/index_merchant'
+import indexMerchant from './compontents/home_header.vue'
 	// 商家 D0
     import indexMerchant_d0 from './modules/idnex_merchant_d0.vue'
 	// 业务员

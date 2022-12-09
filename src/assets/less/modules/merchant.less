@@ -362,18 +362,22 @@
   flex-direction: column;
   .fnas_head{
     background-color: @theme_areabg;
+    display: flex;
+    justify-content: space-around;
     padding-top: .4rem;
     padding-bottom: .533333rem;
-    .flex_center;
-    flex-direction: column;
-    .head_title{
-      font-size: .373333rem;
-      color: #909399;
-      margin-bottom: .333333rem;
-    }
-    .head_content{
-      color: #222222;
-      font-size: .96rem;
+    // .flex_center;
+    .head_fans{
+      .head_title{
+        font-size: .373333rem;
+        color: #909399;
+        margin-bottom: .333333rem;
+      }
+      .head_content{
+       
+        color: #222222;
+        font-size: .96rem;
+      }
     }
   }
   .van-pull-refresh{

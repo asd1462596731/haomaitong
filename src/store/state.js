@@ -14,6 +14,7 @@ const state = {
   },
   mailing_index: 1,
   goods_list: [],
+  merchant_id:'',
   freight: 0,
   select_goods: [],
   choose_address_name: '',

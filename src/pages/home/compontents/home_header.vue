@@ -1,7 +1,6 @@
 <template>
-  <div id="index_master" class="home_box" :style="`top: ${head_rem}rem;`">
-    <div class="home_container">
-      <div id="merchant_header">
+  <div id="header">
+    <div id="merchant_header">
       <div class="header_shop"><span>{{merchant_name}}</span></div>
       <div class="header_money">
         <div class="_money">今日收款(元)</div>
@@ -25,13 +24,13 @@
         <van-col span="2"></van-col>
         <van-col class="col_two" span="11">
           <!-- 实时账本 -->
-          <div class="merchant_title" @click="jumpTo('/bill')">
+          <div class="merchant_title">
             实时账本<van-icon name="arrow" /></div>
           <div class="merchant_bill">
             <template v-for="item in dataList">
               <div class="bill_item" :key="item.pay_day" v-show="item.order.length > 0">
                 <div class="item_list">
-                  <div class="item"  v-for="obj in item.order" :key="obj.id">
+                  <div class="item" @click="jumpTo('/bill')" v-for="obj in item.order" :key="obj.id">
                     <div class="item_img">
                       <img v-if="obj.pay_type === 'wechat'" src="@/assets/img/merchant/merchant_icon5.png" alt="">
                       <img v-if="obj.pay_type === 'alipay'" src="@/assets/img/merchant/merchant_icon3.png" alt="">
@@ -68,36 +67,33 @@
       </van-swipe-item>
     </van-swipe>
   </div>
-      <HomeNav :nav-list="nav_list" style="padding-top:.7rem" />
-	  <HomeNavMaster :nav-list = "nav_master_list" />
-      <HomeLink :link-list="link_list" />
-      <HomeBanner />
-    </div>
-    <HomeBottom />
+    <HomeNav :nav-list="nav_list" style="margin-top:.7rem" />
+    <HomeLink style="margin-top:-0.5rem" :link-list="link_list" />
   </div>
 </template>
+
 <script>
 import HomeNav from '../compontents/home_nav'
-import HomeNavMaster from '../compontents/home_nav_master'
 import HomeLink from '../compontents/home_link'
 import HomeBanner from '../compontents/home_banner'
 import HomeBottom from '../compontents/home_bottom'
-import { mapGetters } from 'vuex'
+import { merchant_nav_list, merchant_link_list } from '@/config'
 import * as request from '@/api'
-import { master_nav_list, merchant_link_list ,mas_nav_list } from '@/config'
+import {
+		mapGetters,
+	} from 'vuex'
 export default {
   components: {
     HomeNav,
-	HomeNavMaster,
     HomeLink,
     HomeBanner,
     HomeBottom
   },
-  data () {
+  data() {
     return {
-      nav_list: master_nav_list,
+      // this.page, this.order_value, this.sort_value, this.desk_id, this.apply_uid, this.create_time, this.pay_type, this.status, this.merchant_id
+      nav_list: merchant_nav_list,
       link_list: merchant_link_list,
-      nav_master_list: mas_nav_list,
       all_money: [],
       line_chat_list: [],
       apply_uid:null,
@@ -125,12 +121,10 @@ export default {
     }
   },
   computed: {
-    level () {
-      return this.user_info.level
-    },
-    ...mapGetters(['user_info','is_code'])
+    ...mapGetters(['is_code'])
   },
   mounted() {
+    // this.echear()
     this.getOrderReportFunc()
     this.getOrderIndexFunc()
     this.getUserIndexHandler()
@@ -306,3 +300,7 @@ export default {
   }
 }
 </script>
+
+<style>
+
+</style>

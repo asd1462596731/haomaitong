@@ -156,6 +156,39 @@
     overflow-y: auto;
     flex: 1;
   }
+    .merchant_head{
+      background-color: @theme_areabg;
+      padding-top: .4rem;
+      padding-bottom: .533333rem;
+      // .flex_center;
+      .head_merchant{
+        display: flex;
+        justify-content: space-around;
+        .head_title{
+          font-size: .373333rem;
+          color: #909399;
+          margin-bottom: .333333rem;
+        }
+        .head_content{
+          color: #222222;
+          font-size: .96rem;
+          text-align: center;
+        }
+      }
+      .count{
+        display: flex;
+        margin-top: .4rem;
+        justify-content: space-around;
+        .direct{
+          color: #909399;
+          font-size: .3rem;
+          .num{
+            color: #222222;
+            font-size: .35rem
+          }
+        }
+      }
+    }
   .merchant_item{
     .flex;
     margin-top: .266667rem;
@@ -169,7 +202,7 @@
       img{
         width: 100%;
         height: 100%;
-        border-radius: 50%;
+        border-radius: 10%;
       }
     }
     .item_info{
@@ -181,6 +214,13 @@
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        .flex;
+        justify-content: space-between;
+        
+      }
+      .van-button{
+        float:right;
+        margin-top: .2rem;
       }
       .info_p{
         margin-top: .266667rem;
@@ -188,10 +228,17 @@
         color: #606266;
         .flex;
         justify-content: space-between;
+        
       }
       .info_time{
+        color: #909399;
+        display: inline-block;
+        font-size: .293333rem;
+        padding-top: .5rem
+      }
+      .info_exmine{
         .flex_algin;
-        margin-top: .333333rem;
+        margin-top: .233333rem;
         font-size: .293333rem;
         color: #909399;
         height: .933333rem;

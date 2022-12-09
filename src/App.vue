@@ -1,7 +1,7 @@
 <template>
   <div id="root">
-	  <title>XXX后台管理</title>
-    <transition :name="transitionName">
+	  <!-- <title>XXX后台管理</title> -->
+    <transition :name="transitionName" >
       <router-view  />
     </transition>
     <Foot v-show="$route.name === 'home' || $route.name === 'bill' || $route.name === 'mine'" />

@@ -15,10 +15,11 @@
       <div class="form_item alginRight" @click="showSelectRoleHandler">
         <div class="input_box">
           <span class="width100">角&#x3000;色</span>
-          <van-field v-show="userObj.level === 'sale'" value="业务员" :readonly="readonly" />
-          <van-field v-show="userObj.level === 'province'" value="省代理" :readonly="readonly" />
-          <van-field v-show="userObj.level === 'city'" value="市代理" :readonly="readonly" />
-          <van-field v-show="userObj.level === 'area'" value="区代理" :readonly="readonly" />
+          <van-field v-show="userObj.level === 'sale'" value="推广员" :readonly="readonly" />
+          <van-field v-show="userObj.level === 'merchant_d0'" value="D0代理" :readonly="readonly" />
+          <van-field v-show="userObj.level === 'province'" value="合伙人" :readonly="readonly" />
+          <van-field v-show="userObj.level === 'city'" value="服务商" :readonly="readonly" />
+          <!-- <van-field v-show="userObj.level === 'area'" value="区代理" :readonly="readonly" /> -->
           <img src="@/assets/img/public/public_icon2.png" alt="">
         </div>
         <div class="msg_box">
@@ -87,16 +88,17 @@ export default {
       rateSelectShow: false,
       role_list: [
         {
-          text: '业务',
+          text: '推广员',
           key: 'sale'
         },
         {
-          text: '区代理',
-          key: 'area'
-        },
-        {
-          text: '市代理',
+          text: '服务商',
           key: 'city'
+        }
+        ,
+        {
+          text: 'D0代理',
+          key: 'merchant_d0'
         }
       ],
       rate_alipay: [],

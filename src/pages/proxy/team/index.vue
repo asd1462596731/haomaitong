@@ -15,10 +15,11 @@
               </div>
               <div class="line_right line_item">
                 角色：
-                <span v-show="item.level === 'sale'">业务员</span>
-                <span v-show="item.level === 'province'">省代理</span>
-                <span v-show="item.level === 'city'">市代理</span>
-                <span v-show="item.level === 'area'">区代理</span>
+                <span v-show="item.level === 'sale'">推广员</span>
+                <span v-show="item.level === 'merchant_d0'">D0代理</span>
+                <span v-show="item.level === 'province'">合伙人</span>
+                <span v-show="item.level === 'city'">服务商</span>
+                <!-- <span v-show="item.level === 'area'">区代理</span> -->
               </div>
             </div>
             <div class="top_line">

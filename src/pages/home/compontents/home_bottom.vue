@@ -15,7 +15,7 @@ export default {
     }
   },
   computed: {
-  	...mapGetters(['site_config','is_code']),
+  	...mapGetters(['site_config','is_code'])
   },
 }
 </script>

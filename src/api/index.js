@@ -316,23 +316,23 @@ export const get_ad_set = function () {
 /**
  *商家收款记录
  */
-export const get_merchant_index = function (page, order_value, sort_value, desk_id ,uid) {
-  return http.get('/order/index', { page, order_value, sort_value, desk_id ,uid})
+export const get_merchant_index = function (page, order_value, sort_value, desk_id, uid, create_time, pay_type, status,merchant_id) {
+  return http.get('/order/index', { page, order_value, sort_value, desk_id, uid, create_time, pay_type, status,merchant_id })
 }
 
 
 /**
  *代理收款记录
  */
-export const get_daili_index = function (page, order_value, sort_value, desk_id,mach_id) {
-  return http.get('/order/daili-index', { page, order_value, sort_value, desk_id,mach_id})
+export const get_daili_index = function (page, order_value, sort_value, desk_id,mach_id, create_time, pay_type, status,merchant_id) {
+  return http.get('/order/daili-index', { page, order_value, sort_value, desk_id,mach_id, create_time, pay_type, status,merchant_id})
 }
 
 /**
  *店员收款记录
  */
-export const get_cashier_index = function (page, order_value, sort_value) {
-  return http.get('/order/cashier-desk-detail', { page, order_value, sort_value })
+export const get_cashier_index = function (page, order_value, sort_value,desk_id, create_time, pay_type, status,merchant_id) {
+  return http.get('/order/cashier-desk-detail', { page, order_value, sort_value,desk_id, create_time, pay_type, status,merchant_id })
 }
 /**
  * 单页面详情
@@ -514,7 +514,10 @@ export const post_merchant_activity_store = function (data) {
 export const post_order_report = function (start_time, end_time,key,mach_id,desk_id) {
   return http.post('/order/report', { start_time, end_time ,key,mach_id,desk_id})
 }
-
+//顾客报表
+export const post_order_consumer = function (create_time,key) {
+  return http.post('/order/consumer', { create_time ,key})
+}
 //商家邮件发送
 export const post_email_send = function (data) {
   return http.post('/send/email_send', { data })

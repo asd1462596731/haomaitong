@@ -22,6 +22,7 @@
           <van-field v-show="userObj.level === 'province'" value="省代理" :readonly="readonly" />
           <van-field v-show="userObj.level === 'city'" value="市代理" :readonly="readonly" />
           <van-field v-show="userObj.level === 'area'" value="区代理" :readonly="readonly" />
+          <van-field v-show="userObj.level === 'merchant_d0'" value="D0代理" :readonly="readonly" />
           <img src="@/assets/img/public/public_icon2.png" alt="">
         </div>
         <div class="msg_box">

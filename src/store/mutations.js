@@ -25,6 +25,10 @@ const mutations = {
     state.device_id = device_id
   },
 
+  [types.MERCHANT_ID] (state,merchant_id) {
+    state.merchant_id = merchant_id
+  },
+
   [types.SET_SHOW_ZY] (state, flag) {
     state.show_zy = flag
     Storage.set('show_zy', flag)
